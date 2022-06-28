@@ -44,8 +44,8 @@ void checkIfReadyToTransitionToReceiving();
  * Or, include your own my_wifi.h with the following 2 lines.
  * Also, set I_AM_WIFI_ACCESS_POINT to false.
  * ***********************************************************/
-const char* ssid = "my_home_network_ssid";
-const char* password = "my_home_network_pw";
+// const char* ssid = "my_home_network_ssid";
+// const char* password = "my_home_network_pw";
 
 const bool I_AM_WIFI_ACCESS_POINT = true;
 const char *ap_ssid = "esp32";
