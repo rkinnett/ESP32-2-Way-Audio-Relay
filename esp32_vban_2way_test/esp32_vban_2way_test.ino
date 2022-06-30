@@ -26,7 +26,7 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WiFiAP.h>
-#include <WiFiUDP.h>
+#include <WiFiUdp.h>
 #include <driver/dac.h>
 #include <driver/i2s.h>
 #include "vban.h"
@@ -34,6 +34,9 @@
 #include "esp_err.h"
 // #include "my_wifi.h"  // this defines my wifi ssid and password
 
+void modeTransition(uint8_t toMode);
+void PrintWiFiEvent(WiFiEvent_t event);
+void checkIfReadyToTransitionToReceiving();
 
 /***************************************************************
  * If you want the ESP32 to connect to your home wifi network,
@@ -127,7 +130,7 @@ enum TransmissionStates {
   TRANSMITTING
 };
 uint8_t transmissionState;
-char *strMode[] = {"RECEIVING", "TRANSMITTING"};
+const char* strMode[] = {"RECEIVING", "TRANSMITTING"};
 
 
 void initialize_i2s_configs(){
@@ -414,7 +417,6 @@ void releasePTT(){
 
 
 void modeTransition(uint8_t toMode) {
-  size_t    bytesOut;
 
   Serial.printf("%s mode\n", strMode[toMode]);
 
